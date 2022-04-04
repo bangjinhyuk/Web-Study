@@ -1,0 +1,67 @@
+
+/* 기본 선택자 */
+
+/* 전체 선택자: 모든 요소 선택*/
+* {
+  color:beige;
+}
+
+/* 태그 선택자: 태그 이름으로 요소 선택 */
+div {
+  color: red;
+}
+
+li {
+  color: aliceblue;
+}
+
+/* 클래스 선택자 : 클래스(class)로 요소 선택 + 클래스는 중복 가능*/
+.orange {
+  color: orange;
+}
+
+/* id 선택자 : id 속성으로 요소 선택 id는 단일이어야함 */
+#orange {
+  color: orange;
+}
+
+/* 복합 선택자 */
+
+/* 일치 선택자 : 선택자 abc와 xyz를 동시에 만족하는 요소 선택*/
+span.orange {
+  /* span중 orange 클래스 선택 */
+  color: red;
+}
+
+/* 자식 선택자 : 선택자 abc의 자식 요소 xyz 선택*/
+ul > .orange {
+  /* 먼저 클래스가 orange인 요소를 찾고 그중 부모 태그가 ul 인것만 선택 */
+  color: antiquewhite;
+}
+
+/* 하위 선택자 : 선택자 abc의 하위요소 xyz 선택 */
+div .orange {
+  /* 클래스가 orange인 요소를 찾고 그중 조상 태그가 div 인것만 선택 */
+  color: red;
+}
+
+/* 인접 형제 선택자 : abc의 '다음' 형제 요소 xyz 하나 선택*/
+/* 형제란
+ * <ul>
+ *   <li>딸기</li>
+ *   <li class="orange">수박</li>
+ *   <li>오렌지</li>
+ *   <li>망고</li>
+ * </ul
+ * 같은 부모 태그 아래에 li 태그들은 모두 형제 태그들임
+*/
+.orange + li {
+  /* 위에서 orange 클래스를 가진 수박을 선택한뒤 다음 li 태그 요소인 오렌지 선택 */
+  color: red;
+}
+
+/* 일반 형제 선택자 : 선택자 abc의 '다음' 형제 요소 xyz 모두 선택*/
+.orange ~ li {
+  /* 망고와 오렌지 두개 모두 선택 */
+  color: red;
+}

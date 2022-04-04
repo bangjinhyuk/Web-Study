@@ -1,3 +1,7 @@
+/* import 방식 이 방식 보다는 병렬 방식인 link 방식 사용 추천 */
+/* @import url("./box.css"); */
+
+
 /* div {
   width: 200px;
   height: 200px;
@@ -6,6 +10,7 @@
 /* body {
   margin: 0px;
 } */
+
 .table {
   background-color: aqua;
 }

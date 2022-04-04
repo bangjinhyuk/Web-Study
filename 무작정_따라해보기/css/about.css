@@ -1,0 +1,84 @@
+.box1 {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+  transition: 1s;
+}
+
+/* 가상 클래스 선택자:  어떠한 행위를 했을때 작동하는것 */
+/* hover : 마우스를 올리면 변하는것 */
+.box1:hover {
+  width: 500px;
+  background-color: rosybrown;
+}
+
+.box2 {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+  transition: 1s;
+}
+
+/* active : 클릭을 하는동안 변하는것 */
+.box2:active {
+  width: 500px;
+  background-color: rosybrown;
+}
+
+.box3 {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+  transition: 1s;
+}
+.box4 {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+  transition: 1s;
+}
+/* focus : 포커스 되면 선택 */
+.box3:focus {
+  width: 500px;
+  background-color: rosybrown;
+}
+.box4:focus {
+  width: 500px;
+  background-color: rosybrown;
+}
+
+/* First Child : 선택자 abc가 형제 요소중 첫째라면 선택*/
+.fruits span:first-child {
+  color: red;
+}
+/* 첫번째 요소가 span인데 div인것을 찾기 때문에 암것도 변하지 않음 */
+.fruits div:first-child {
+  color: red;
+}
+/* Last Child : 선택자 abc가 형제 요소중 막내라면 선택*/
+.fruits h3:last-child {
+  color: darkblue;
+}
+
+/* NTH Child : 선택자 abc가 형제 요소중 Nth라면 선택*/
+.fruits *:nth-child(2) {
+  color: yellow;
+}
+
+/* NTH Child(n) : 선택자 abc가 형제 요소중 N*2th라면 선택*/
+.fruits *:nth-child(2n) {
+  /* 짝수 */
+  background-color: bisque;
+}
+.fruits *:nth-child(2n+1) {
+  /* 홀수 */
+  background-color: salmon;
+}
+.fruits *:nth-child(n+2) {
+}
+
+/* 부정 선택자 */
+/* Not : 선택자 xyz가 아닌 abc요소 선택*/
+.fruits *:not(span){
+  color: aliceblue;
+}
