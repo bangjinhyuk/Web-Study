@@ -1,0 +1,42 @@
+.title1 {
+    color: blue;
+}
+.title2 {
+    color: green;
+}
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: orange;
+    transition: 5s;
+}
+/* hover 마우스를 올려두는 동안 실행 되는 가상 클래스*/
+.box:hover {
+    width: 300px;
+    background-color: aqua;
+}
+/* active 마우스로 클릭하는 동안 실행되는 가상 클래스*/
+.box:active {
+    height: 300px;
+}
+/* focus 포커스가 되면 동작되는 가상 클래스*/
+.input1:focus {
+    background-color: green;
+}
+.box1 {
+    margin-left: 100px;
+    width: 100px;
+    height: 100px;
+    background-color: orange;
+    transition: 5s;
+}
+.box1:focus {
+    height: 300px;
+}
+.box1::before {
+    content: "앞";
+    /* 인라인 -> 블록화*/
+    display: block;
+    color: blue;
+    background-color: aliceblue;
+}
