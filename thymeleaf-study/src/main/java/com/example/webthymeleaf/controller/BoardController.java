@@ -34,6 +34,10 @@ public class BoardController {
         model.addAttribute("results", results);
         return "list";
     }
+    @GetMapping("/form")
+    public String form(Model model) {
+        return "form";
+    }
 
     @Getter
     @Setter
