@@ -8,7 +8,15 @@
     <div class="container">
         <h2>DB 리스트 조회</h2>
         <div class="text-right">
-            <a type="button" class="btn btn-outline-primary" th:href="@{/board/form}">DB 생성</a>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    DB 발급
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" th:href="@{/board/form}">MySQL</a>
+                    <a class="dropdown-item disabled">Redis</a>
+                </div>
+            </div>
         </div>
         <div>총 건수 : <span th:text="${#lists.size(results)}"></span> </div>
         <table class="table">

@@ -40,22 +40,18 @@ public class BoardController {
         engineTypes.add(new EngineType("MySQL", false));
         engineTypes.add(new EngineType("Redis", false));
 
-        List<Version> versions = new ArrayList<>();
-        versions.add(new Version("MySQL", "5.7"));
-        versions.add(new Version("MySQL", "8.0.29"));
-        versions.add(new Version("MySQL", "8.0.19"));
-        versions.add(new Version("Redis", "6.0.6"));
-        versions.add(new Version("Redis", "6.2.6"));
+        List<OSType> osTypes = new ArrayList<>();
+        osTypes.add(new OSType("Ubuntu", false));
+        osTypes.add(new OSType("CentOS", false));
 
         model.addAttribute("result", new Result());
         model.addAttribute("engineTypes", engineTypes);
-        model.addAttribute("versions", versions);
+        model.addAttribute("osTypes", osTypes);
         return "/form";
     }
 
     @PostMapping("/form")
     public String formSubmit(@ModelAttribute Result result) {
-        System.out.println("1111111");
         System.out.println(result);
         return "redirect:/board/list";
     }
@@ -72,6 +68,21 @@ public class BoardController {
             this.isDisabled = isDisabled;
         }
     }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class OSType {
+        String name;
+        boolean isDisabled;
+
+        public OSType(String name, boolean isDisabled) {
+            this.name = name;
+            this.isDisabled = isDisabled;
+        }
+    }
+
+
 
     @Getter
     @Setter
@@ -100,7 +111,7 @@ public class BoardController {
         String result = "SUCCESS";
         String createUser;
         String createTime;
-        String type;
+        String os;
         String version;
 
         @Builder
