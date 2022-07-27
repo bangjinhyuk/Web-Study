@@ -31,6 +31,16 @@ public class BoardController {
                         .createUser("bbangi98")
                         .createTime("2022-10-21").build()
         );
+        results.add(
+                Result.builder()
+                        .region("IDC(VM)")
+                        .zone("QA")
+                        .name("이름-2")
+                        .result("ING")
+                        .description("000DB입니다.")
+                        .createUser("bbangi98")
+                        .createTime("2022-12-21").build()
+        );
         model.addAttribute("results", results);
         return "/list";
     }

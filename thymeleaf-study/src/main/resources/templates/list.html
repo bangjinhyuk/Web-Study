@@ -9,7 +9,7 @@
         <h2>DB 리스트 조회</h2>
         <div class="text-right">
             <div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     DB 발급
                 </button>
                 <div class="dropdown-menu">
@@ -38,7 +38,17 @@
                 <td th:text="${result.zone}">Mark</td>
                 <td th:text="${result.name}">Mark</td>
                 <td th:text="${result.description}">Mark</td>
-                <td></td>
+                <td>
+                    <div class="d-flex flex-wrap" style="width: 350px;">
+                        <span class="badge badge-primary" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal; ">DB명: exam_db</span>
+                        <span class="badge badge-primary" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal;">Master User명 : master1</span>
+                        <span class="badge badge-primary" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal;">MySQL 5.7</span>
+                        <span class="badge badge-primary" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal;">Asia/Seoul</span>
+                        <span class="badge badge-primary" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal;">utf8mb4</span>
+                        <span class="badge badge-primary" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal;">Master-Slave</span>
+
+                    </div>
+                </td>
                 <td th:text="${result.result}">Mark</td>
                 <td th:text="${result.createUser}">Mark2</td>
                 <td th:text="${result.createTime}">Mark1</td>
