@@ -1,5 +1,6 @@
 package com.example.webthymeleaf.controller;
 
+import com.example.webthymeleaf.CreateMySQLReq;
 import com.example.webthymeleaf.DatabaseProcessRes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
@@ -42,15 +43,15 @@ public class BoardController {
         osTypes.add(new OSType("Ubuntu", false));
         osTypes.add(new OSType("CentOS", false));
 
-        model.addAttribute("result", new Result());
+        model.addAttribute("createMySQLReq", new CreateMySQLReq());
         model.addAttribute("engineTypes", engineTypes);
         model.addAttribute("osTypes", osTypes);
         return "/form";
     }
 
     @PostMapping("/form")
-    public String formSubmit(@ModelAttribute Result result) {
-        System.out.println(result);
+    public String formSubmit(@ModelAttribute CreateMySQLReq createMySQLReq) {
+        System.out.println(createMySQLReq);
         return "redirect:/board/list";
     }
 

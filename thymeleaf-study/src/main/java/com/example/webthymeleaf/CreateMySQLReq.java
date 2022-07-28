@@ -1,14 +1,14 @@
 package com.example.webthymeleaf;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * Created by bangjinhyuk on 2022/07/28.
  */
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
 public class CreateMySQLReq {
     //OS
     String os;
@@ -26,7 +26,7 @@ public class CreateMySQLReq {
     String collate;
 
     //replication 적용 유무
-    boolean isReplication;
+    Boolean isReplication;
 
 
     //prefix 설정
@@ -49,4 +49,5 @@ public class CreateMySQLReq {
         this.prefix = prefix;
         this.name = name;
     }
+
 }

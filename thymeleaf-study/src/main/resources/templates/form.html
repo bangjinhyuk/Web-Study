@@ -6,10 +6,10 @@
     const getValue = (target) => {
         const value = target.value;
         const text =  target.options[target.selectedIndex].text;
-        var target = document.getElementById("inputGroupSelect02");
+        var target = document.getElementById("inputGroupSelectVersion");
 
-        const ubuntu = ["5.7", "8.0.29"];
-        const centos = ["8.0.19"];
+        const ubuntu = ["5.7", "8"];
+        const centos = ["8"];
         var version;
         if (value === "Ubuntu") version = ubuntu;
         else version = centos;
@@ -22,55 +22,90 @@
             opt.innerHTML = version[x];
             target.appendChild(opt);
         }
+
         // document.querySelector(`#inputGroupSelect02`).innerHTML = `<option th:each="version : ${versions}" th:text="${version.version}" th:value="${version.version}">One</option>`;
     }
+    const getCollateValue = (target) => {
+        const value = target.value;
+        const text = target.options[target.selectedIndex].text;
+        var target = document.getElementById("inputGroupSelectCollate");
+
+        const utf16 = ["utf16_general_ci"];
+        const utf32 = ["utf32_general_ci"];
+        const utf8 = ["utf8_general_ci"];
+        const utf8mb4 = ["utf8_unicode_ci"];
+        var collate;
+        if (value === "utf16") collate = utf16;
+        if (value === "utf32") collate = utf32;
+        if (value === "utf8") collate = utf8;
+        if (value === "utf8mb4") collate = utf8mb4;
+        target.value = '';
+        target.options.length = 0;
+
+        for (x in collate) {
+            var opt = document.createElement("option");
+            opt.value = collate[x];
+            opt.innerHTML = collate[x];
+            target.appendChild(opt);
+        }
+    }
+    window.addEventListener('load' , (event) => getValue(document.getElementById("inputGroupSelectOS")));
+    window.addEventListener('load' , (event) => getCollateValue(document.getElementById("inputGroupSelectCharset")));
 </script>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('list')"></nav>
 
 <div class="container">
-    <h2>DB 생성</h2>
-    <form action="#" th:action="@{/board/form}" th:object="${result}" method="post">
+    <h2>MySQL DB 생성</h2>
+    <form action="#" th:action="@{/board/form}" th:object="${createMySQLReq}" method="post">
         <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">DB 구성 플랜 이름</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="col-form-label" >
+                <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="" >
             </div>
         </div>
         <div class="form-group row">
-            <label for="region" class="col-sm-2 col-form-label">서버 위치</label>
+            <label class="col-sm-2 col-form-label">서버 위치</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="region" th:field="*{region}" placeholder="col-form-label">
+                <select class="custom-select" id="inputGroupSelectRegion" aria-label="Example select with button addon">
+                    <option value="IDC(VM)">IDC(VM)</option>
+                </select>
             </div>
         </div>
         <div class="form-group row">
-            <label for="zone" class="col-sm-2 col-form-label">ZONE</label>
+            <label class="col-sm-2 col-form-label">ZONE</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="zone" th:field="*{zone}" placeholder="col-form-label">
+                <select class="custom-select" id="inputGroupSelectZone" aria-label="Example select with button addon">
+                    <option value="QA">QA</option>
+                </select>
             </div>
         </div>
         <div class="form-group row">
             <label for="prefix" class="col-sm-2 col-form-label">prefix</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="prefix" placeholder="col-form-label">
+                <input type="text" class="form-control" id="prefix" th:field="*{prefix}" placeholder="">
             </div>
         </div>
         <div class="form-group row">
-            <label for="dbInstanceName" class="col-sm-2 col-form-label">DB 인스턴스 식별자</label>
+            <label for="dbInstanceName" class="col-sm-2 col-form-label">볼륨 크기</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="dbInstanceName" placeholder="col-form-label">
+                <input type="text" class="form-control" id="dbInstanceName" value="20" style="display: inline; width: 200px" readonly>
+                <span>GB</span>
             </div>
         </div>
         <div class="form-group row">
-            <label for="volume" class="col-sm-2 col-form-label">볼륨 크기</label>
+            <label class="col-sm-2 col-form-label">인스턴스 타입</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="volume" placeholder="col-form-label">
+                <select class="custom-select" id="inputGroupSelect" aria-label="Example select with button addon">
+                    <option value="nos.4core.4GB">nos.4core.4GB</option>
+                </select>
             </div>
         </div>
+        <hr class="my-4">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">OS</label>
             <div class="col-sm-10">
-                <select class="custom-select" id="inputGroupSelect01" aria-label="Example select with button addon" th:field="*{os}" onchange="getValue(this)">
+                <select class="custom-select" id="inputGroupSelectOS" aria-label="Example select with button addon" th:field="*{os}" onchange="getValue(this)">
                     <option value="notSelected">선택해주세요</option>
                     <option th:each="type : ${osTypes}" th:text="${type.name}" th:value="${type.name}" th:disabled="${type.isDisabled} == true">One</option>
                 </select>
@@ -79,8 +114,66 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">버전</label>
             <div class="col-sm-10">
-                <select class="custom-select" id="inputGroupSelect02" aria-label="Example select with button addon" th:field="*{version}">
+                <select class="custom-select" id="inputGroupSelectVersion" aria-label="Example select with button addon" th:field="*{version}">
                 </select>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="form-group row">
+            <label for="userName" class="col-sm-2 col-form-label">마스터 사용자 이름</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="userName" th:field="*{userName}" placeholder="" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="userPassword" class="col-sm-2 col-form-label">마스터 암호</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="userPassword" th:field="*{userPassword}" placeholder="" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="userPassword-re" class="col-sm-2 col-form-label">마스터 암호 확인</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="userPassword-re" placeholder="" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="databaseName" class="col-sm-2 col-form-label">초기 데이터베이스 이름</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="databaseName" th:field="*{databaseName}" placeholder="" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">time_zone</label>
+            <div class="col-sm-10">
+                <select class="custom-select" id="inputGroupTimeZone" aria-label="Example select with button addon" th:field="*{timeZone}" >
+                    <option value="Asia/Seoul">Asia/Seoul</option>
+                    <option value="UTC">UTC</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">charset</label>
+            <div class="col-sm-10">
+                <select class="custom-select" id="inputGroupSelectCharset" aria-label="Example select with button addon" th:field="*{charset}" onchange="getCollateValue(this)">
+                    <option value="utf16">utf16</option>
+                    <option value="utf32">utf32</option>
+                    <option value="utf8">utf8</option>
+                    <option value="utf8mb4">utf8mb4</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">collate</label>
+            <div class="col-sm-10">
+                <select class="custom-select" id="inputGroupSelectCollate" aria-label="Example select with button addon" th:field="*{collate}">
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="custom-control custom-switch" style="margin-left: 20px;">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" th:field="*{isReplication}">
+                <label class="custom-control-label" for="customSwitch1">읽기 전용 복제본 생성</label>
             </div>
         </div>
 
