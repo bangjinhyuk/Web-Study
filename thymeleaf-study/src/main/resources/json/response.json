@@ -1,0 +1,45 @@
+{
+  "createUser": "bbangi98",
+  "createTime": "2022-07-28T09:51:21.421+00:00",
+  "updateUser": null,
+  "updateTime": null,
+  "id": 7,
+  "planId": "cd9963c2-a4bc-4c12-a700-7c388660e60e",
+  "name": "testcreate-20",
+  "zone": null,
+  "engineType": "MYSQL",
+  "description": "MySQL DATABASE",
+  "dbTags": [
+    "DB명 : exam_db",
+    "Master User명 : bbangi98",
+    "MySQL 8",
+    "UTC",
+    "utf8"
+  ],
+  "planStatus": "ING",
+  "requestStep": "APPLY_PLAN",
+  "planUrl": "https://dev-nos.nmn.io/1194/planner/serviceconfig/detail/cd9963c2-a4bc-4c12-a700-7c388660e60e",
+  "serverType": "IDC(VM)",
+  "mySQLRes": {
+    "masterUserName": "bbangi98",
+    "masterUserPassword": "Netmarble1~",
+    "databaseName": "exam_db",
+    "charset": "utf8",
+    "collate": "utf8_general_ci",
+    "timezone": "UTC",
+    "isReplication": false
+  },
+  "instanceResList": [
+    {
+      "hostName": "sqdddwwsfdbt201",
+      "ip": null,
+      "clusterName": "dddwwsf-DB-test",
+      "description": null,
+      "status": null,
+      "imageName": "nos.centos7.6",
+      "instanceType": "nos.4core.4GB",
+      "confUrl": "https://dev-nos.nmn.io/1194/conf/run?size=15&page=1&filters=&id=684932#",
+      "computeUrl": ""
+    }
+  ]
+}

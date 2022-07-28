@@ -1,5 +1,7 @@
 package com.example.webthymeleaf.controller;
 
+import com.example.webthymeleaf.DatabaseProcessRes;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,29 +23,13 @@ import java.util.List;
 public class BoardController {
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<Result> results = new ArrayList<>();
-        results.add(
-                Result.builder()
-                        .region("IDC(VM)")
-                        .zone("QA")
-                        .name("이름-1")
-                        .result("SUCCESS")
-                        .description("~~ㅇ비니다.")
-                        .createUser("bbangi98")
-                        .createTime("2022-10-21").build()
-        );
-        results.add(
-                Result.builder()
-                        .region("IDC(VM)")
-                        .zone("QA")
-                        .name("이름-2")
-                        .result("ING")
-                        .description("000DB입니다.")
-                        .createUser("bbangi98")
-                        .createTime("2022-12-21").build()
-        );
-        model.addAttribute("results", results);
+    public String list(Model model) throws IOException {
+        List<DatabaseProcessRes> databaseProcessRes = new ArrayList<>();
+        databaseProcessRes.add(new ObjectMapper().readValue(new File("src/main/resources/json/response.json"),DatabaseProcessRes.class));
+        databaseProcessRes.add(new ObjectMapper().readValue(new File("src/main/resources/json/response1.json"),DatabaseProcessRes.class));
+
+
+        model.addAttribute("databaseProcessResList", databaseProcessRes);
         return "/list";
     }
     @GetMapping("/form")

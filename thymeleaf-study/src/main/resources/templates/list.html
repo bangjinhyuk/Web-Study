@@ -5,7 +5,7 @@
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('list')"></nav>
 
-    <div class="container">
+    <div class="container-fluid" style="max-width:1400px">
         <h2>DB 리스트 조회</h2>
         <div class="text-right">
             <div class="btn-group">
@@ -18,40 +18,42 @@
                 </div>
             </div>
         </div>
-        <div>총 건수 : <span th:text="${#lists.size(results)}"></span> </div>
+        <div>총 건수 : <span th:text="${#lists.size(databaseProcessResList)}"></span> </div>
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">서버 위치</th>
-                <th scope="col">ZONE</th>
-                <th scope="col">이름</th>
-                <th scope="col">설명</th>
-                <th scope="col">DB 정보</th>
-                <th scope="col">생성 결과</th>
-                <th scope="col">생성한 유저</th>
-                <th scope="col">생성 시간</th>
+                <th nowrap scope="col">서버 위치</th>
+                <th nowrap scope="col">ZONE</th>
+                <th nowrap scope="col">이름</th>
+                <th nowrap scope="col">설명</th>
+                <th nowrap scope="col">DB 정보</th>
+                <th nowrap scope="col">발급 요청 결과</th>
+                <th nowrap scope="col">생성한 유저</th>
+                <th nowrap scope="col">생성 시간</th>
+                <th nowrap scope="col">발급 진행 상태</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="result : ${results}">
-                <td th:text="${result.region}">Mark</td>
-                <td th:text="${result.zone}">Mark</td>
-                <td th:text="${result.name}">Mark</td>
-                <td th:text="${result.description}">Mark</td>
+            <tr th:each="databaseProcessRes : ${databaseProcessResList}">
+                <td class="align-middle" th:text="${databaseProcessRes.serverType}">Mark</td>
+                <td class="align-middle" th:text="${databaseProcessRes.zone}">Mark</td>
+                <td class="align-middle" th:text="${databaseProcessRes.name}">Mark</td>
+                <td class="align-middle" th:text="${databaseProcessRes.description}">Mark</td>
                 <td>
-                    <div class="d-flex flex-wrap" style="width: 350px;">
-                        <span class="badge badge-primary" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal; ">DB명: exam_db</span>
-                        <span class="badge badge-primary" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal;">Master User명 : master1</span>
-                        <span class="badge badge-primary" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal;">MySQL 5.7</span>
-                        <span class="badge badge-primary" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal;">Asia/Seoul</span>
-                        <span class="badge badge-primary" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal;">utf8mb4</span>
-                        <span class="badge badge-primary" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal;">Master-Slave</span>
-
+                    <div class="d-flex flex-wrap" style="width: 300px;">
+                        <span class="badge badge-primary align-middle" style="margin: 2px; background-color: white; border: 1px solid #44a6ef; color: #44a6ef; height: 24px; font-weight : normal;" th:each="tag : ${databaseProcessRes.dbTags}" th:text="${tag}">234</span>
                     </div>
                 </td>
-                <td th:text="${result.result}">Mark</td>
-                <td th:text="${result.createUser}">Mark2</td>
-                <td th:text="${result.createTime}">Mark1</td>
+                <td class="align-middle" th:text="${databaseProcessRes.requestStep}">Mark</td>
+                <td class="align-middle" th:text="${databaseProcessRes.createUser}">Mark2</td>
+                <td class="align-middle" th:text="${databaseProcessRes.createTime}">Mark1</td>
+                <td class="align-middle" style="text-align: center;">
+                    <div class="spinner-border text-primary align-middle" role="status" style="display: inline-block;" th:if="${databaseProcessRes.planStatus.toString().equals('ING')}">
+                        <span class="sr-only align-middle">Loading...</span>
+                    </div>
+                    <a class="btn btn-primary" href="#" role="button" th:if="${databaseProcessRes.planStatus.toString().equals('SUCCESS')}">SUCCESS</a>
+                </td>
+
             </tr>
             </tbody>
         </table>
